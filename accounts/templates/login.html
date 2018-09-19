@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block coine %}Login in other to keep track of your Portfolio{% endblock %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="col-md-6 offset-sm-3">
+ <div class="card my-3 bg-white rounded box-shadow border-white" style="border: 0px !important; margin-top: 40px !important;">
+     <div class="card-body">
+      <div class="put-it"></div>
+     <form action="{% url 'login' %}" method="post" class="form-signin">
+         {% csrf_token %}
+         <input type="hidden" name="next" value="{{ request.GET.next }}" />
+         {% bootstrap_form form %}
+         <button type="submit" class="btn btn-primary btn-block">Log In <span class="load-icon"></span></button>
+     </form>
+         <br>
+     </div>
+     <div class="card-footer text-center" style="border: 0px;">
+        
+     </div>
+ </div>
+{% endblock %}
+{% block domready %}
+console.log('juiiif');
+$('.form-signin').on('submit', function(e){
+        e.preventDefault();
+        let username = $('#id_username').val();
+        let password = $('#id_password').val();
+        let csrf_token = $( "input[name^='csrfmiddlewaretoken']" ).val();
+        let next_url = $( "input[name^='next" ).val();
+        let button = $('button[type=submit]');
+        let loaderContainer = $('.load-icon');
+        $.ajax({
+            type: "POST",
+            url: "{% url 'login' %}",
+            data:{username:username, password:password, csrfmiddlewaretoken:csrf_token,next:next_url},
+            
+            beforeSend: function () {
+              button.attr('disabled','disabled');
+              loaderContainer.html('<i class="fas fa-circle-notch fa-spin"></i>');
+            },
+            
+            success: function(data){
+              if (data['error'] === 'treue'){
+                  $('.put-it').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'> Invalid credentails. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button></div>");
+              }
+              else {
+                $('.put-it').html("<div class='alert alert-info alert-dismissible fade show' role='alert'> successful validation. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button></div>");
+                window.location.replace(data['redirect']);
+              }
+              
+              button.removeAttr('disabled');
+              loaderContainer.html('');
+            },
+            error: function(){
+                console.log('hhh')
+            }
+        });
+      });
+{% endblock %}

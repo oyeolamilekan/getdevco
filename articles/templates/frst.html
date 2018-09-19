@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .jumbo{
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(147,241,160,1) 0%, rgba(84,243,161,1) 100.2% );;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .mt-10{
+        margin-top: 10%;
+        font-size: 3.2em;
+    }
+    .btn-block-50{
+        width:58%;
+    }
+    .navbar{
+        background-color: white !important;
+    }
+</style>
+<div class="jumbo">
+    <div class="text-body text-center p-5">
+        <h1 class="text-dark mt-10 bottom">Write what you feel.</h1>
+        <h4 class="text-light top">Let see the world through your eyes.</h4>
+        <h3 class="mt-4 left"><a href="{% url 'register' %}" class="btn btn-light text-success btn-lg btn-block-50"><b>Get started</b></a></h3>
+    </div>
+</div>
+<div class="container-fluid" style="margin: 0px !important;">
+    <div class="row jumbotron" style="margin-bottom: 0px; border-radius: 0px !important;">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+        <p class="lead left">Pedium taps into the brains of the world’s most insightful writers, thinkers, and storytellers to bring you the smartest takes on topics that matter. So whatever your interest, you can always find fresh thinking and unique perspectives.
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xs-2">
+        <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-small bottom">Get started</a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-light p-4" style="margin: 0px !important;">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow border border-white right">
+              <div class="card-body">
+                <h1><i class="fa fa-book text-success"></i></h1>
+                <h1 style="font-weight: 200;" class="text-success">Read anytime</h1>
+                <p>Pedium allows your readers to read any of your articles, and acess your content through a consumable abook their appointment 24 hours a day 7 days a week, including same day appointments.</p>
+                
+              </div>
+            </div>
+            <div class="card mb-4 box-shadow border border-white bottom">
+              <div class="card-body">
+                <h1><i class="fa fa-heart text-danger"></i></h1>
+                <h1 style="font-weight: 200;" class="text-success">Writers Portal</h1>
+                <p>Access your articles through a dedicated server.</p>
+                
+              </div>
+            </div>
+              <div class="card mb-4 box-shadow border border-white left">
+                  <div class="card-body">
+                    <h1><i class="fas fa-money-bill-alt" style="font-weight: 200;"></i></h1>
+                    <h1 style="font-weight: 200;" class="text-success">Save time & money</h1>
+                    <p>We help by reducing the amount the amount of time you spend on different platforms, by bringing your write closer to you.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <div class="explanation p-4">
+        <div class="container-fluid">
+            <div class="row">
+            
+            <br>
+            <div class="col-lg-6 left-box">
+                <img src="{% static 'arte.jpeg' %}" class="img-fluid rounded box-shadow">
+            </div>
+            <div class="col-lg-6 p-3 right">
+                <h2>Be a writer</h2>
+                <!-- <p>Our mission is to help reduce waiting time for our patients, and increase the affordability, simplicity and quality of medical care for all.</p> -->
+
+                <p>With the power of the network, different ways to engage with stories, and the ability to follow your favorite topics, writers, and publications, you’re in control of your reading experience. So the stories that matter most to you are always at your fingertips.</p>
+                <a href="{% url 'register' %}" class="btn btn-primary btn-block">Join Us</a>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-4 bg-dark text-white footer-understand">
+        <div class="container bg-dark" align="center">
+        <div class="row">
+            <div class="col-sm">
+            <h2><i class="fab fa-facebook-square"></i></h2>
+            </div>
+            <div class="col-sm">
+            <h2><i class="fab fa-twitter-square"></i></h2>
+            </div>
+            <div class="col-sm">
+            <h2><i class="fab fa-linkedin"></i></h2>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

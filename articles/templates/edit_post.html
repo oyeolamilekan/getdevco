@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %} 
+<div class="col-md-6 offset-sm-3">
+    <div class="bg-white p-3 my-3 bg-white rounded box-shadow border-white" style="border: 0px !important; margin-top: 40px !important;">
+        <div class="put-it"></div>
+        <form action="." method="post" class="form-signin" enctype="multipart/form-data" id='work'>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button name="submit" class="btn btn-primary btn-block" id="share">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block domready %}
+console.log('hhhd');
+let button = $('btn-s');
+let loaderContainer = $('put-it');
+$('#work').on('submit', function(e){
+    e.preventDefault();
+    var fd = new FormData(document.querySelector("form"));
+    $.ajax({
+        url: "{% url 'new_post' %}",
+        type: "POST",
+        data: fd,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,   // tell jQuery not to set contentType
+        beforeSend: function () {
+            button.attr('disabled','disabled');
+            loaderContainer.html('<i class="fas fa-circle-notch fa-spin"></i>');
+        },
+        success: function(data){
+            if (data['status'] === 'ok'){
+                $('.put-it').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'> Sucessfully edited. <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button></div>");
+                window.location.replace(data['reverse_url']);
+            }
+            else {
+              $('.put-it').html("<div class='alert alert-info alert-dismissible fade show' role='alert'> Your article must contain you name<button type='button' class='close' data-dismiss='alert' aria-label='Close'> <span aria-hidden='true'>&times;</span></button></div>");
+            }
+            
+            button.removeAttr('disabled');
+            loaderContainer.html('');
+          },
+          error: function(){
+              console.log('hhh')
+          }
+    })
+})
+{% endblock %}

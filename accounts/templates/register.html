@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+    label{
+        margin-left: 4px;
+    }
+    /* .form-control{
+        border: 1px solid #fff;
+    } */
+</style>
+<div class="col-lg-6 offset-lg-3 mt-4 mb-4">
+    <div class="card bg-lighter box-shadow rounded box-shadow border-white mt-3" style="border: 0px !important;">
+        <div class="card-body">
+        <form action="." method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+            {% bootstrap_form form %}
+            {% bootstrap_form form_2 %}
+            <button type="submit" class="btn btn-success btn-block">Create an account</button>
+        </form>
+       </div>
+    </div>
+</div>
+{% endblock %}
